@@ -9,7 +9,7 @@
 // Event handling, user interaction is what starts the code execution.
 
 var taskInput=document.getElementById("new-task");//Add a new task.
-var addButton=document.getElementsByTagName("button")[0];//first button
+var addButton=document.getElementById("btn-add");//button add
 var incompleteTaskHolder=document.getElementById("incomplete-tasks");//ul of #incompleteTasks
 var completedTasksHolder=document.getElementById("completed-tasks");//completed-tasks
 
@@ -45,9 +45,9 @@ var createNewTaskElement=function(taskString){
     editInput.className="task";
 
     editButton.innerText="Edit"; //innerText encodes special characters, HTML does not.
-    editButton.className="btn-edit";
+    editButton.className="btn edit";
 
-    deleteButton.className="btn-delete";
+    deleteButton.className="btn delete";
     deleteButtonImg.src="./remove.svg";
     deleteButtonImg.className="img-remove";
     deleteButton.appendChild(deleteButtonImg);
@@ -134,7 +134,7 @@ var taskCompleted=function(){
 
 var taskIncomplete=function(){
     console.log("Incomplete Task...");
-//Mark task as incomplete.
+    //Mark task as incomplete.
     //When the checkbox is unchecked
     //Append the task list item to the #incomplete-tasks.
     var listItem=this.parentNode;
@@ -152,9 +152,10 @@ var ajaxRequest=function(){
 
 
 //Set the click handler to the addTask function.
-addButton.onclick=addTask;
-addButton.addEventListener("click",addTask);
-addButton.addEventListener("click",ajaxRequest);
+addButton.addEventListener("click",()=>{
+    addTask();
+    ajaxRequest();
+})
 
 
 var bindTaskEvents=function(taskListItem,checkBoxEventHandler){
